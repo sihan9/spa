@@ -5,14 +5,6 @@ $(function (){
       $btn    = $('#calculate'),
       $per = $('#perimeter'),
       $area = $('#area');
-  /**
-  * decimalSave
-  * 小数点后面保留第n位
-  *
-  * @param num
-  * @param n
-  * @returns {undefined}
-  */
   function decimalSave(num,n){
     return Math.round(num * Math.pow(10,n)) / Math.pow(10,n);
   }
@@ -37,17 +29,13 @@ $(function (){
     if(Number($date.val()) < 0 ){
       $msg.html('必须大于0！');
       $date.select();
-      return false;
+       return false;
     }
-    //prompt error message
-    if($date.val() === ''){
-      $msg.html('不能为空！');
-      $date.select();
-      return false;
-    }
+
+    $msg.html('');
     return true;
   }
-
+  //表单检验
   /*calc button click event*/
   $btn.click(function (){
     //validete if error return;
@@ -67,7 +55,41 @@ $(function (){
     $per.val(p);
     $area.val(a);
   }) ;
-  
+  //字段检验
+  $width.focusout(function(){
+    if(!validate('#width')) $width.select();
+  });
+  $heigth.focusout(function(){
+    if(!validate('#heigth')) $heigth.select();
+  });
+  //字符检验
+  $width.keypress(function(e){
+    //e.key 
+    //e.target.value
+    //e.preventDefault()屏蔽键盘输入
+    //console.log(e.key);
+    //console.log(e.target.value);
+    if(/[abcdf-zABCDF-Z`~!@#$%^&*()\=_+[\]{}|;:'",<>/?\\]/.test(e.key)){
+      e.preventDefault();
+      return;
+    }
+    var pos = e.target.selectionStart,
+        con = e.target.value;
+    console.log(pos);
+    if(e.key === 'e'){
+      if(pos === 0 || con.indexOf('e') != -1 || con.indexOf('E') !== -1){
+        e.preventDefault();
+        return;
+      } 
+      if(pos === 1 && con.substring(0,1) == '-'){
+        e.preventDefault();
+        return;
+      }
+    }  
+  });
+  $heigth.keypress(function(e){
+
+  })
 });
 
 

@@ -15,8 +15,7 @@ input,label{
 span{
   color:red;
 }
-#width-mag,
-#height-mag {
+#width-mag , #heigth-mag {
   color: red;
   font-size: 0.8em;
   margin-left: 63px;              

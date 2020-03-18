@@ -12,6 +12,11 @@ input,label{
   margin-left:58px;
   width:70px;
 }
-span{
+input:valid+span:after{
+  content:'✓';
+  color:green;
+}
+input:invalid+span:after{
+  content:'✖';
   color:red;
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>pwd可见</title>
+  <link rel="stylesheet" href="./index.css"> 
+</head>
+<body>
+<input type="button" value="添加密码框" id="addpwd">
+<input type="button" value="获得密码" disabled id="getpwd">
+<div class="main">
+</div> 
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="./index.js"></script>
+<script>
+$(function(){
+  var $btnAddPwd = $('#addpwd'),
+      $btnGetPwd = $('#getpwd'),
+      pwdTextboxs = [];
+
+  /* global PasswordTextbox: true */
+  $btnAddPwd.click(function(){
+    var pwd = new PwdBox('.main');
+    pwdTextboxs.push(pwd);
+    $btnGetPwd.removeAttr('disabled');
+  });
+
+  $btnGetPwd.click(function() {
+    pwdTextboxs.forEach(function(pwd) {
+      alert(pwd.getPwd());
+    });
+  });
+});
+</script>
+</body>
+</html>

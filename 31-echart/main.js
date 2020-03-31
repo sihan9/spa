@@ -3,16 +3,20 @@ $(function(){
 
   var xData = [],
       yData = [];
-  
-  for(var p =0 ;p<=1;p+=0.01){
-    xData.push(p);
-    if(p === 0){
-      yData.push(0);
-    }else if(p === 1){
-      yData.push(0);
-    }else{
-      yData.push(-1*p*Math.log2(p)-(1-p)*Math.log2(1-p) );
-    }
+ 
+  function myfun (x,n){
+    return Math.round(x * Math.pow(10, n)) / Math.pow(10, n);
+  }
+  function h(p){
+    return -1 * (plog(p) + plog(1 - p));
+  }
+  function plog(p) {
+    return (p === 0)? 0 : p * Math.log2(p);
+  }
+ 
+  for(var p =0 ;p<=1;p+=0.1){
+    xData.push(myfun(p,1));
+    yData.push(myfun(h(p),2));
   }
 
   var option = {
@@ -24,13 +28,13 @@ $(function(){
       data:['信息量']
     },
     xAxis: {
-      data:xData
+      data: xData
     },
     yAxis: {},
     series: [{
-      name: '销量',
+      name: '信息量',
       type: 'line',
-      smooth:true,
+      smooth: 'true',
       data: yData
     }]
   };
